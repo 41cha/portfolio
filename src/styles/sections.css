@@ -146,29 +146,47 @@
 }
 
 /* ==========================================================================
-   Work  (Figma: 7:326 / 7:328 / 7:329)
-   White background, ghost word behind the heading.
+   Section head (shared by Work, Service, Experience)
+   Ghost word + "/TITLE". Mobile: title below the ghost, tablet+: overlaps it.
+   ========================================================================== */
+:root { --fs-ghost: 56px; }
+@media (min-width: 768px)  { :root { --fs-ghost: 96px; } }
+@media (min-width: 1024px) { :root { --fs-ghost: 140px; } }
+
+.section-head { margin-bottom: 64px; }
+
+.section-head__ghost {
+  display: block;
+  text-align: center;
+  color: var(--color-gray-2);
+  font-size: var(--fs-ghost);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+.section-head__title {
+  position: relative;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .section-head { margin-bottom: var(--space-120); }
+  .section-head__title { margin-top: -45px; }
+}
+@media (min-width: 1024px) {
+  .section-head__title { margin-top: -51px; }
+}
+
+/* ==========================================================================
+   Work  (Figma: 7:326 / 7:328 / 7:329). White background.
    ========================================================================== */
 .work {
   background: var(--surface);
   padding-top: var(--space-72);
   padding-bottom: var(--section-gap);
-}
-
-.work__head { margin-bottom: var(--space-56); }
-
-.work__ghost {
-  display: block;
-  text-align: center;
-  color: var(--color-gray-2);
-  user-select: none;
-}
-
-/* Mobile: heading sits below the ghost word. Tablet+: it overlaps it. */
-.work__title {
-  position: relative;
-  margin: 10px 0 0;
-  text-align: center;
 }
 
 .work__content {
@@ -194,10 +212,7 @@
 
 .work__all { grid-area: all; width: 100%; }
 
-/* Card */
-.work-card {
-  transition: transform var(--dur-fast) var(--ease-out);
-}
+.work-card { transition: transform var(--dur-fast) var(--ease-out); }
 .work-card:hover { transform: translateY(var(--hover-lift)); }
 
 .work-card__image {
@@ -222,8 +237,6 @@
 
 @media (min-width: 768px) {
   .work { padding-top: var(--space-56); }
-  .work__head { margin-bottom: var(--space-120); }
-  .work__title { margin-top: -45px; }
 
   .work__content {
     grid-template-areas: "filters all" "cards cards";
@@ -240,6 +253,282 @@
 }
 
 @media (min-width: 1024px) {
-  .work__title { margin-top: -51px; }
   .work-card__image { aspect-ratio: 4 / 3; }
+}
+
+/* ==========================================================================
+   Service  (Figma: 7:333 / 7:335 / 7:336). White background, accordion.
+   < 1024: stacked (title + arrow, then text, then image).
+   >= 1024: open row is three columns (text | image | arrow).
+   Note: Figma tablet frame reuses desktop type sizes in a squeezed 3-column
+   row; here tablet uses the stacked layout and the token type scale.
+   ========================================================================== */
+.service {
+  background: var(--surface);
+  padding-top: var(--space-72);
+  padding-bottom: var(--section-gap);
+}
+
+.service__list { margin: 0; padding: 0; list-style: none; }
+
+.service-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  grid-template-areas: "title arrow" "body body" "media media";
+  column-gap: var(--space-8);
+  padding: var(--space-24) var(--space-16);
+  border-bottom: var(--border-width) solid var(--border);
+  transition: background var(--dur-base) var(--ease-in-out);
+}
+.service-item.is-open {
+  background: var(--bg);
+  border-bottom-color: transparent;
+  border-radius: var(--radius-card);
+}
+
+.service-item__title {
+  grid-area: title;
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: 1.733;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.service-item__toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+/* Stretch the click area over the whole row; body and media sit above it. */
+.service-item__toggle::after { content: ""; position: absolute; inset: 0; }
+.service-item__toggle:focus-visible { outline: none; }
+.service-item__toggle:focus-visible::after {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+  border-radius: var(--radius-card);
+}
+
+.service-item__arrow {
+  grid-area: arrow;
+  align-self: start;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 1px;
+  color: var(--text);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.service-item:hover .service-item__arrow { transform: translate(2px, -2px); }
+
+.service-item__body {
+  grid-area: body;
+  position: relative;
+  z-index: 1;
+  margin-top: var(--space-16);
+}
+.service-item__desc {
+  margin: 0;
+  max-width: 480px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--text-body);
+}
+.service-item__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-top: var(--space-16);
+}
+
+.service-item__media {
+  grid-area: media;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  margin-top: var(--space-16);
+  aspect-ratio: 16 / 10;
+  background: var(--color-gray-2);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 768px) {
+  .service { padding-top: var(--space-56); }
+  .service-item { padding: var(--space-32) var(--space-24); }
+  .service-item__title { line-height: 1.2; }
+  .service-item__arrow { margin-top: 4px; }
+}
+
+@media (min-width: 1024px) {
+  .service-item.is-open {
+    grid-template-columns: minmax(0, 1fr) 319px 40px;
+    grid-template-areas: "title media arrow" "body media arrow";
+    column-gap: var(--space-32);
+  }
+  .service-item:not(.is-open) { column-gap: var(--space-32); }
+  .service-item__media { margin-top: 0; max-width: none; }
+}
+
+/* ==========================================================================
+   Experience  (Figma: 7:340 / 7:342 / 7:343). Dark section (Black 2).
+   .section--dark (components.css) sets background and light text.
+   ========================================================================== */
+.experience {
+  padding-top: var(--space-72);
+  padding-bottom: var(--section-gap);
+}
+.section--dark .section-head__ghost { color: var(--color-gray-4); }
+
+.experience__list { margin: 0; padding: 0; list-style: none; }
+
+.experience-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-24);
+  border-bottom: var(--border-width) solid var(--color-gray-4);
+}
+
+.experience-item__main { display: flex; flex-direction: column; gap: var(--space-8); }
+
+.experience-item__company {
+  margin: 0;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: 500;
+  color: var(--text-on-dark);
+}
+.experience-item__role,
+.experience-item__date {
+  margin: 0;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--color-gray-2);
+}
+.experience-item__role { font-size: 14px; }
+.experience-item__date { font-size: 14px; }
+
+@media (min-width: 768px) {
+  .experience { padding-top: var(--space-56); }
+  .experience-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-24);
+  }
+  .experience-item__date { font-size: 16px; text-align: right; white-space: nowrap; }
+}
+
+/* ==========================================================================
+   Footer  (Figma: 7:347 / 7:349 / 7:350). Gray 1 background.
+   Title sizes measured from the frames: 48 / 72 / 96 (not the Display scale).
+   ========================================================================== */
+:root { --fs-footer-title: 48px; }
+@media (min-width: 768px)  { :root { --fs-footer-title: 72px; } }
+@media (min-width: 1024px) { :root { --fs-footer-title: 96px; } }
+
+.footer {
+  background: var(--bg);
+  padding-top: var(--space-96);
+}
+
+.footer__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  text-align: center;
+}
+.footer .status-pill { height: 36px; }
+
+.footer__title {
+  max-width: 920px;
+  margin: 0;
+  font-size: var(--fs-footer-title);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.footer__desc {
+  max-width: 460px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--text-body);
+}
+
+.footer__btn { width: 100%; }
+
+.footer__mail {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: var(--fw-small);
+  color: var(--text-muted);
+}
+.footer__mail a { color: inherit; text-decoration: none; }
+.footer__mail a:hover { text-decoration: underline; }
+
+/* Bottom bar */
+.footer__bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-top: var(--space-96);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-32);
+  border-top: var(--border-width) solid var(--border);
+}
+
+.footer__copy {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: var(--fw-small);
+  color: var(--text-muted);
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer__links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: var(--lh-small);
+  font-weight: 600;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.footer__links a:hover { color: var(--text-muted); }
+
+@media (min-width: 768px) {
+  .footer__btn { width: auto; }
+  .footer__bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-56);
+  }
+}
+
+@media (min-width: 1440px) {
+  .footer { padding-top: var(--space-120); }
+  .footer__bar { margin-top: var(--space-120); }
 }
