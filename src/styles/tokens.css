@@ -1,0 +1,301 @@
+/* ==========================================================================
+   Portfolio design tokens
+   Source: Figma style guide "Portfolio" (blocks 01-08)
+   Breakpoints (cannot be CSS variables, use these in @media):
+     tablet  >= 768px
+     desktop >= 1024px
+     wide    >= 1440px
+   ========================================================================== */
+
+/* Font: add in index.html <head>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
+*/
+
+:root {
+  /* ---------- 01. Colors ---------- */
+  --color-primary: #000000;
+  --color-secondary: #2F80ED;   /* accent: large elements only (contrast on white ~3.9:1) */
+
+  --color-success: #27AE60;
+  --color-warning: #E2B93B;
+  --color-error: #EB5757;
+
+  --color-black-1: #000000;
+  --color-black-2: #262626;     /* dark sections (Experience), hover on primary button */
+  --color-white: #FFFFFF;
+
+  --color-gray-1: #F4F4F4;      /* page background, disabled fill */
+  --color-gray-2: #E2E2E2;      /* borders, dividers */
+  --color-gray-3: #6B6B6B;      /* muted text, placeholders, dates */
+  --color-gray-4: #4F4F4F;      /* body text, state messages */
+
+  /* Semantic aliases: use these in components */
+  --bg: var(--color-gray-1);
+  --surface: var(--color-white);
+  --surface-dark: var(--color-black-2);
+  --text: var(--color-black-1);
+  --text-body: var(--color-gray-4);
+  --text-muted: var(--color-gray-3);
+  --text-on-dark: var(--color-white);
+  --border: var(--color-gray-2);
+  --accent: var(--color-secondary);
+
+  /* ---------- 02. Typography ---------- */
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Values match the Figma text styles used in the layout.
+     Mobile-first: base = mobile 360, overridden at 768 and 1024 below.
+     Figma styles: Mobile Display 48 / Display tablet 96 / Display 140,
+     H1 56, H2 40, H3 24 (also used for nav items, pills and card titles). */
+  --fs-display: 48px;
+  --fs-h1: 28px;
+  --fs-h2: 24px;
+  --fs-h3: 24px;
+  --fs-body: 16px;
+  --fs-small: 13px;
+
+  --lh-display: 1;        /* 48 / 96 / 140 = 100% */
+  --lh-h1: 1.1;           /* 61.6 at 56px */
+  --lh-h2: 1.2;           /* 48 at 40px */
+  --lh-h3: 1.733;         /* 41.6 at 24px */
+  --lh-body: 1.5;         /* 24 */
+  --lh-small: 1.385;      /* 18 */
+
+  --fw-display: 800;
+  --fw-h1: 700;
+  --fw-h2: 700;
+  --fw-h3: 700;
+  --fw-body: 700;         /* the layout uses Bold for 16px text */
+  --fw-small: 600;
+
+  --ls-display: -0.02em;
+  --ls-h1: -0.02em;
+
+  /* ---------- 05. Spacing scale ---------- */
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-56: 56px;
+  --space-72: 72px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+
+  /* ---------- 04. Grid (mobile first, overridden below) ---------- */
+  --container-max: 1200px;
+  --grid-columns: 4;
+  --grid-gutter: 16px;
+  --page-margin: 16px;
+  --section-gap: var(--space-72);
+
+  /* ---------- Shapes ---------- */
+  --radius-input: 8px;
+  --radius-card: 8px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --focus-ring: 2px solid var(--color-secondary);
+
+  /* ---------- Component sizes ---------- */
+  --control-height: 56px;   /* inputs, dropdowns */
+  --button-height: 48px;
+  --pill-height: 40px;      /* filters, tags */
+  --checkbox-size: 20px;
+  --toggle-width: 44px;
+  --toggle-height: 24px;
+  --textarea-height: 160px;
+  --icon-size: 24px;        /* live area 20px + 2px safe area on each side */
+
+  /* ---------- 08. Motion ---------- */
+  --dur-fast: 200ms;        /* hover, focus */
+  --dur-base: 500ms;        /* reveal on scroll, accordion */
+  --dur-slow: 800ms;        /* section theme change, page transition */
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-distance: 24px;
+  --stagger: 80ms;          /* max 5 siblings in a row */
+  --hover-lift: -4px;
+  --press-scale: 0.98;
+}
+
+/* Tablet 768+ : 6 columns */
+@media (min-width: 768px) {
+  :root {
+    --grid-columns: 6;
+    --grid-gutter: 24px;
+    --page-margin: 24px;
+    --section-gap: var(--space-80);
+
+    --fs-display: 96px;
+    --fs-h1: 40px;
+    --fs-h2: 40px;
+  }
+}
+
+/* Desktop 1024+ : 12 columns */
+@media (min-width: 1024px) {
+  :root {
+    --grid-columns: 12;
+    --grid-gutter: 24px;
+    --page-margin: 32px;
+    --section-gap: var(--space-96);
+
+    --fs-display: 140px;
+    --fs-h1: 56px;
+    --fs-h2: 40px;
+  }
+}
+
+/* Wide 1440+ : container 1200px, 120px margins come from centering */
+@media (min-width: 1440px) {
+  :root {
+    --page-margin: 0px;
+    --section-gap: var(--space-120);
+  }
+}
+
+/* Reduced motion: all durations become instant */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --stagger: 0ms;
+  }
+}
+
+/* ==========================================================================
+   Base + utilities (optional, delete if you prefer your own)
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+
+.section { padding-block: var(--section-gap); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+/* Text styles */
+.text-display { font-size: var(--fs-display); line-height: var(--lh-display); font-weight: var(--fw-display); letter-spacing: var(--ls-display); color: var(--text); }
+.text-h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); font-weight: var(--fw-h1); letter-spacing: var(--ls-h1); color: var(--text); }
+.text-h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: var(--fw-h2); color: var(--text); }
+.text-h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: var(--fw-h3); color: var(--text); }
+.text-body { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-body); max-width: 560px; }
+.text-small { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-small); color: var(--text-muted); }
+
+/* Outline text for the hero name: <span class="text-outline">FIRST</span> LAST */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  height: var(--button-height);
+  padding: 0 var(--space-24);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: var(--fw-body);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.btn:active { transform: scale(var(--press-scale)); }
+.btn:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+.btn-primary { background: var(--color-primary); color: var(--color-white); }
+.btn-primary:hover { background: var(--color-black-2); }
+
+.btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn-secondary:hover { background: var(--bg); }
+
+.btn:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+
+/* Filter pill */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  height: var(--pill-height);
+  padding: 0 var(--space-16);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.pill:hover { background: var(--bg); }
+.pill[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-white); }
+
+/* Form fields */
+.field { display: flex; flex-direction: column; gap: var(--space-8); }
+.field-label { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-small); color: var(--text); }
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  padding: var(--space-16);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-input);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.field-input { height: var(--control-height); }
+.field-textarea { min-height: var(--textarea-height); resize: vertical; }
+
+.field-input::placeholder,
+.field-textarea::placeholder { color: var(--text-muted); }
+
+.field-input:hover,
+.field-textarea:hover { border-color: var(--color-gray-3); }
+
+.field-input:focus,
+.field-textarea:focus { outline: none; border: 2px solid var(--color-secondary); padding: calc(var(--space-16) - 1px); }
+
+.field-input:disabled,
+.field-textarea:disabled { background: var(--bg); color: var(--text-muted); border-color: var(--border); }
+
+.field.is-success .field-input { border-color: var(--color-success); }
+.field.is-warning .field-input { border-color: var(--color-warning); }
+.field.is-error   .field-input { border-color: var(--color-error); }
+
+/* State messages use Gray 4 text (state colors fail contrast on white) */
+.field-status { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-small); color: var(--text-muted); }
+.field.is-success .field-status,
+.field.is-warning .field-status,
+.field.is-error   .field-status { color: var(--text-body); }
