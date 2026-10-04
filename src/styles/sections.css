@@ -1,31 +1,47 @@
-/* Page sections. Import after components.css. Mobile first. */
+/* Page sections. Import after components.css. Mobile first.
+   Layouts follow Figma frames: Hero 7:242 (1440), 7:244 (768), 7:245 (360). */
 
-/* ---------- Nav ---------- */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--bg);
-}
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+.nav { position: relative; z-index: 10; }
+
 .nav__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-16);
-  padding-block: var(--space-16);
+  padding-block: var(--space-32);
 }
-.nav__links {
-  display: none;
-  gap: var(--space-40);
-  margin: 0;
+
+.nav .status-pill { font-size: 18px; font-weight: 500; line-height: 1; }
+
+/* Mobile: Menu on the left, status pill on the right */
+.nav__menu-btn {
+  order: -1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--pill-height);
   padding: 0;
-  list-style: none;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
 }
+.nav__menu-btn:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
+
+.nav__links { display: none; margin: 0; padding: 0; list-style: none; }
 .nav__links a,
 .nav__panel a:not(.btn) {
   color: var(--text);
   text-decoration: none;
   font-size: var(--fs-h3);
+  font-weight: 500;
   line-height: 1;
   transition: color var(--dur-fast) var(--ease-out);
 }
@@ -34,8 +50,7 @@
 .nav__links a:focus-visible,
 .nav__panel a:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
 
-.nav__actions { display: flex; align-items: center; gap: var(--space-8); }
-.nav__cta { display: none; }
+.nav__cta { display: none; height: var(--pill-height); font-size: 20px; }
 
 .nav__panel {
   display: flex;
@@ -46,52 +61,185 @@
   border-top: var(--border-width) solid var(--border);
 }
 
+/* Tablet: [status] [Menu] [Let's Talk] */
 @media (min-width: 768px) {
+  .nav__bar { padding-block: var(--space-56); }
+  .nav .status-pill { font-size: var(--fs-h3); }
+  .nav__menu-btn { order: 0; font-size: var(--fs-h3); font-weight: 500; }
   .nav__cta { display: inline-flex; }
   .nav__panel-cta { display: none; }
 }
+
+/* Desktop: [status] Work Service Experience Contact [Let's Talk] */
 @media (min-width: 1024px) {
-  .nav__links { display: flex; }
+  .nav__bar { padding-block: var(--space-72); }
   .nav__menu-btn { display: none; }
   .nav__panel { display: none; }
+  .nav__links {
+    flex: 1;
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
 
-/* ---------- Hero ---------- */
-.hero { padding-top: var(--space-40); }
-.hero__title { margin: 0; }
-.hero__body {
-  display: grid;
-  gap: var(--space-40);
-  margin-top: var(--space-40);
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero { padding-bottom: var(--space-56); }
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-56);
 }
+
+.hero__title { margin: 0; text-align: center; }
+
+/* Figma: white fill + outline. paint-order puts the fill on top of the
+   stroke, which hides the overlap "knots" of the variable font. */
+.hero__title .text-outline {
+  color: var(--surface);
+  -webkit-text-stroke: 4px var(--text);
+  paint-order: stroke fill;
+}
+
+.hero__body { display: flex; flex-direction: column; gap: var(--space-24); }
+
 .hero__info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-24);
+  gap: var(--space-16);
 }
-.hero__role,
+.hero__role { margin: 0; font-weight: 500; }
 .hero__desc { margin: 0; }
-.hero__socials { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.hero__cta { height: 40px; font-size: 14px; }
 
-/* Photo placeholder: replace with <img> later */
-.hero__photo {
+/* Socials: 2x2 grid on mobile, stacked column from tablet */
+.hero__socials {
   display: grid;
-  place-items: center;
-  width: 100%;
-  max-width: 400px;
-  aspect-ratio: 4 / 5;
-  background: var(--color-gray-2);
-  border-radius: var(--radius-card);
-  color: var(--text-muted);
-  font-size: var(--fs-small);
-  font-weight: var(--fw-small);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+.hero__social { justify-content: center; font-size: 16px; }
+
+@media (min-width: 768px) {
+  .hero__inner {
+    min-height: max(560px, calc(100svh - 190px));
+  }
+  .hero__title { margin-block: auto; }
+
+  .hero__body {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-inline: var(--space-24);
+  }
+
+  .hero__socials { grid-template-columns: auto; width: max-content; }
+  .hero__social { font-size: 20px; }
+  .hero__social svg { width: 24px; height: 24px; }
 }
 
 @media (min-width: 1024px) {
-  .hero__body {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: end;
+  .hero__body { padding-inline: var(--space-32); }
+}
+
+/* ==========================================================================
+   Work  (Figma: 7:326 / 7:328 / 7:329)
+   White background, ghost word behind the heading.
+   ========================================================================== */
+.work {
+  background: var(--surface);
+  padding-top: var(--space-72);
+  padding-bottom: var(--section-gap);
+}
+
+.work__head { margin-bottom: var(--space-56); }
+
+.work__ghost {
+  display: block;
+  text-align: center;
+  color: var(--color-gray-2);
+  user-select: none;
+}
+
+/* Mobile: heading sits below the ghost word. Tablet+: it overlaps it. */
+.work__title {
+  position: relative;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.work__content {
+  display: grid;
+  grid-template-areas: "filters" "cards" "all";
+  gap: var(--space-32);
+}
+
+.work__filters {
+  grid-area: filters;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+.work__filters .pill { font-size: 16px; }
+
+.work__cards {
+  grid-area: cards;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-40) var(--space-24);
+}
+
+.work__all { grid-area: all; width: 100%; }
+
+/* Card */
+.work-card {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.work-card:hover { transform: translateY(var(--hover-lift)); }
+
+.work-card__image {
+  aspect-ratio: 4 / 3;
+  background: var(--color-gray-2);
+  border-radius: var(--radius-card);
+}
+.work-card__title {
+  margin: var(--space-16) 0 0;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--text);
+}
+.work-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-top: 12px;
+}
+.work-card .tag { height: 22px; padding: 0 12px; }
+
+@media (min-width: 768px) {
+  .work { padding-top: var(--space-56); }
+  .work__head { margin-bottom: var(--space-120); }
+  .work__title { margin-top: -45px; }
+
+  .work__content {
+    grid-template-areas: "filters all" "cards cards";
+    grid-template-columns: 1fr auto;
+    column-gap: var(--space-16);
+    row-gap: var(--space-56);
+    align-items: center;
   }
-  .hero__photo { justify-self: end; }
+  .work__filters .pill { font-size: 20px; }
+  .work__all { width: auto; height: 44px; font-size: 20px; }
+
+  .work__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .work-card__image { aspect-ratio: 4 / 5; }
+}
+
+@media (min-width: 1024px) {
+  .work__title { margin-top: -51px; }
+  .work-card__image { aspect-ratio: 4 / 3; }
 }
