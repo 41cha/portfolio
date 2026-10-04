@@ -1,0 +1,97 @@
+/* Page sections. Import after components.css. Mobile first. */
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+}
+.nav__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding-block: var(--space-16);
+}
+.nav__links {
+  display: none;
+  gap: var(--space-40);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__links a,
+.nav__panel a:not(.btn) {
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--fs-h3);
+  line-height: 1;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav__links a:hover,
+.nav__panel a:not(.btn):hover { color: var(--text-muted); }
+.nav__links a:focus-visible,
+.nav__panel a:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
+
+.nav__actions { display: flex; align-items: center; gap: var(--space-8); }
+.nav__cta { display: none; }
+
+.nav__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+  padding-block: var(--space-24);
+  border-top: var(--border-width) solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .nav__cta { display: inline-flex; }
+  .nav__panel-cta { display: none; }
+}
+@media (min-width: 1024px) {
+  .nav__links { display: flex; }
+  .nav__menu-btn { display: none; }
+  .nav__panel { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-top: var(--space-40); }
+.hero__title { margin: 0; }
+.hero__body {
+  display: grid;
+  gap: var(--space-40);
+  margin-top: var(--space-40);
+}
+.hero__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+}
+.hero__role,
+.hero__desc { margin: 0; }
+.hero__socials { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+
+/* Photo placeholder: replace with <img> later */
+.hero__photo {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4 / 5;
+  background: var(--color-gray-2);
+  border-radius: var(--radius-card);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-small);
+}
+
+@media (min-width: 1024px) {
+  .hero__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
+  }
+  .hero__photo { justify-self: end; }
+}

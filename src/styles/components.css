@@ -1,7 +1,7 @@
 /* Component styles that extend tokens.css. Import after tokens.css. */
 
-/* Buttons rendered as links */
-a.btn { text-decoration: none; }
+/* Buttons and pills rendered as links */
+a.btn, a.pill { text-decoration: none; }
 
 /* Icons inside buttons and pills keep their size */
 .btn svg, .pill svg { flex-shrink: 0; }
@@ -23,6 +23,29 @@ a.btn { text-decoration: none; }
   white-space: nowrap;
 }
 
+/* Status pill: "Open for work" */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: var(--pill-height);
+  padding: 0 var(--space-16);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: var(--fw-small);
+  white-space: nowrap;
+}
+.status-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
 /* Dark section (Experience) */
 .section--dark {
   background: var(--surface-dark);
@@ -33,6 +56,3 @@ a.btn { text-decoration: none; }
 .section--dark .text-h3,
 .section--dark .text-display { color: var(--text-on-dark); }
 .section--dark .text-small { color: var(--color-gray-2); }
-
-/* Demo helper, remove later */
-.demo-row { display: flex; flex-wrap: wrap; gap: var(--space-16); align-items: center; }
