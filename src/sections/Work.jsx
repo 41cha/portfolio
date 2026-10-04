@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Container from '../components/Container'
+import SectionHead from '../components/SectionHead'
 import Pill from '../components/Pill'
 import Button from '../components/Button'
 import ProjectCard from '../components/ProjectCard'
@@ -10,36 +11,31 @@ export default function Work() {
   const visible = PROJECTS.filter((p) => filter === 'All' || p.category === filter)
 
   return (
-    <section id="work" className="work">
-      <Container>
-        <div className="work__head">
-          <span className="text-display work__ghost" aria-hidden="true">
-            PORTFOLIO
-          </span>
-          <h2 className="text-h1 work__title">/SELECTED WORK</h2>
-        </div>
+      <section id="work" className="work">
+        <Container>
+          <SectionHead ghost="PORTFOLIO" title="/SELECTED WORK" />
 
-        <div className="work__content">
-          <div className="work__filters" role="group" aria-label="Filter projects">
-            {FILTERS.map((f) => (
-              <Pill key={f} active={filter === f} onClick={() => setFilter(f)}>
-                {f}
-              </Pill>
-            ))}
+          <div className="work__content">
+            <div className="work__filters" role="group" aria-label="Filter projects">
+              {FILTERS.map((f) => (
+                  <Pill key={f} active={filter === f} onClick={() => setFilter(f)}>
+                    {f}
+                  </Pill>
+              ))}
+            </div>
+
+            <div className="work__cards">
+              {visible.map((p) => (
+                  <ProjectCard key={p.id} title={p.title} tags={p.tags} />
+              ))}
+            </div>
+
+            {/* TODO: link to the all-projects page when it exists */}
+            <Button variant="secondary" href="#work" icon="arrow-up-right" className="work__all">
+              View All Work
+            </Button>
           </div>
-
-          <div className="work__cards">
-            {visible.map((p) => (
-              <ProjectCard key={p.id} title={p.title} tags={p.tags} />
-            ))}
-          </div>
-
-          {/* TODO: link to the all-projects page when it exists */}
-          <Button variant="secondary" href="#work" icon="arrow-up-right" className="work__all">
-            View All Work
-          </Button>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
   )
 }
