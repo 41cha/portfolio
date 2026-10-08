@@ -12,8 +12,8 @@ import App from './App.jsx'
 // animations are skipped (opacity fades still run).
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <MotionConfig reducedMotion="user">
-            <App />
-        </MotionConfig>
+
+        <App />
+
     </StrictMode>,
 )

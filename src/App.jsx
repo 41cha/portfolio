@@ -6,6 +6,7 @@ import Experience from './sections/Experience'
 import Footer from './sections/Footer'
 
 export default function App() {
+    console.log('App is rendering')
     return (
         <>
             <Nav />
