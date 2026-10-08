@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import Container from '../components/Container'
 import SectionHead from '../components/SectionHead'
 import Pill from '../components/Pill'
@@ -25,9 +26,11 @@ export default function Work() {
             </div>
 
             <div className="work__cards">
-              {visible.map((p) => (
-                  <ProjectCard key={p.id} title={p.title} tags={p.tags} />
-              ))}
+              <AnimatePresence mode="popLayout">
+                {visible.map((p, i) => (
+                    <ProjectCard key={p.id} title={p.title} tags={p.tags} index={i} />
+                ))}
+              </AnimatePresence>
             </div>
 
             {/* TODO: link to the all-projects page when it exists */}

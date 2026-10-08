@@ -1,5 +1,5 @@
-// TODO: verify dates for "Student Council" and "FPV Summer Camp"
-// (flagged as unconfirmed in the handoff).
+// Source: LinkedIn profile PDF + Figma layout.
+// TODO: verify the "Student Council" date (not on LinkedIn).
 export const EXPERIENCE = [
   {
     id: 'skylink',
@@ -14,15 +14,21 @@ export const EXPERIENCE = [
     date: 'Now',
   },
   {
-    id: 'hackathon',
+    id: 'hackathon-iv',
     company: 'IV Ukrainian Hackathon (GrantHUB UA)',
     role: 'Team Lead / Fullstack / QA / DevOps',
     date: 'Jun 2026',
   },
   {
-    id: 'fpv-camp',
-    company: 'FPV Summer Camp',
-    role: 'Instructor, FPV drone engineering',
-    date: 'Summer 2026',
+    id: 'stem-camp',
+    company: 'INTITA Summer STEM Camp',
+    role: 'STEM Instructor & Mentor, Drone Engineering',
+    date: 'Jul 2026',
+  },
+  {
+    id: 'hackathon-iii',
+    company: 'III Ukrainian Hackathon',
+    role: 'Diploma',
+    date: 'Dec 2025',
   },
 ]

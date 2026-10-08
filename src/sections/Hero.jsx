@@ -1,4 +1,5 @@
 import Container from '../components/Container'
+import Reveal from '../components/Reveal'
 import Button from '../components/Button'
 import Pill from '../components/Pill'
 import { SOCIALS } from '../data/socials'
@@ -7,13 +8,13 @@ export default function Hero() {
   return (
       <section id="home" className="hero">
         <Container className="hero__inner">
-          <h1 className="text-display hero__title">
+          <Reveal as="h1" className="text-display hero__title">
             <span className="text-outline">VOLODYMYR</span>
             <br />
             DZIMINA
-          </h1>
+          </Reveal>
 
-          <div className="hero__body">
+          <Reveal className="hero__body" delay={0.16}>
             <div className="hero__info">
               <p className="text-h2 hero__role">Full stack developer</p>
               <p className="text-body hero__desc">
@@ -33,7 +34,7 @@ export default function Hero() {
                   </Pill>
               ))}
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
   )

@@ -332,8 +332,11 @@
   grid-area: body;
   position: relative;
   z-index: 1;
-  margin-top: var(--space-16);
+  overflow: hidden;
 }
+/* Spacing lives on an inner element: padding on the animated wrapper would
+   keep it 16px tall at height 0 and make the collapse jump. */
+.service-item__body-inner { padding-top: var(--space-16); }
 .service-item__desc {
   margin: 0;
   max-width: 480px;
@@ -349,10 +352,13 @@
   margin-top: var(--space-16);
 }
 
-.service-item__media {
+.service-item__media-wrap {
   grid-area: media;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+.service-item__media {
   width: 100%;
   max-width: 480px;
   margin-top: var(--space-16);
@@ -531,4 +537,20 @@
 @media (min-width: 1440px) {
   .footer { padding-top: var(--space-120); }
   .footer__bar { margin-top: var(--space-120); }
+}
+
+/* ==========================================================================
+   Page background: white everywhere except Experience (dark) and Footer
+   (Gray 1). Overrides the Gray 1 body background from tokens.css.
+   ========================================================================== */
+body { background: var(--surface); }
+
+/* Project screenshots inside cards: crop from the top-left (logo + headline) */
+.work-card__image { overflow: hidden; border: var(--border-width) solid var(--border); }
+.work-card__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
 }
