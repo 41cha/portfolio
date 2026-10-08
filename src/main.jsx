@@ -1,3 +1,5 @@
+console.log("MAIN.JSX ПРАЦЮЄ!");
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { MotionConfig } from 'framer-motion'
