@@ -1,6 +1,7 @@
 import Container from '../components/Container'
 import Reveal from '../components/Reveal'
 import StatusPill from '../components/StatusPill'
+import SplitText from '../components/SplitText'
 import Button from '../components/Button'
 import { SOCIALS } from '../data/socials'
 import { EMAIL } from '../data/contact'
@@ -12,14 +13,14 @@ export default function Footer() {
           <Reveal className="footer__cta">
             <StatusPill />
 
-            <h2 className="footer__title">HAVE A PROJECT IN MIND?</h2>
+            <SplitText as="h2" inView stagger={0.025} className="footer__title" text="HAVE A PROJECT IN MIND?" />
 
             <p className="footer__desc">
               Let's build something clear, fast and reliable. Tell me about your project and I'll
               get back to you.
             </p>
 
-            <Button href={`mailto:${EMAIL}`} icon="arrow-up-right" className="footer__btn">
+            <Button magnetic href={`mailto:${EMAIL}`} icon="arrow-up-right" className="footer__btn">
               Contact Me
             </Button>
 

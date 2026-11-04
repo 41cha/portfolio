@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { EASE_EXPO } from '../lib/motion'
 import Container from '../components/Container'
 import StatusPill from '../components/StatusPill'
 import Button from '../components/Button'
@@ -44,28 +45,52 @@ export default function Nav() {
               ))}
             </ul>
 
-            <Button href="#contact" icon="arrow-up-right" className="nav__cta">
+            <Button magnetic href="#contact" icon="arrow-up-right" className="nav__cta">
               Let's Talk
             </Button>
           </div>
 
-          {open && (
-              <nav id="nav-panel" className="nav__panel" aria-label="Main">
-                {LINKS.map((l) => (
-                    <a key={l.href} href={l.href} onClick={close}>
-                      {l.label}
-                    </a>
-                ))}
-                <Button
-                    href="#contact"
-                    icon="arrow-up-right"
-                    className="nav__panel-cta"
-                    onClick={close}
+          {/* The wrapper animates the height (padding sits on the inner nav, so the
+              closed state is really 0 tall); links then rise one after another. */}
+          <AnimatePresence initial={false}>
+            {open && (
+                <motion.div
+                    key="panel"
+                    id="nav-panel"
+                    className="nav__panel-wrap"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: EASE_EXPO }}
                 >
-                  Let's Talk
-                </Button>
-              </nav>
-          )}
+                  <nav className="nav__panel" aria-label="Main">
+                    {LINKS.map((l, i) => (
+                        <motion.a
+                            key={l.href}
+                            href={l.href}
+                            onClick={close}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.45, ease: EASE_EXPO, delay: 0.08 + i * 0.06 }}
+                        >
+                          {l.label}
+                        </motion.a>
+                    ))}
+                    <Button
+                        href="#contact"
+                        icon="arrow-up-right"
+                        className="nav__panel-cta"
+                        onClick={close}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, ease: EASE_EXPO, delay: 0.08 + LINKS.length * 0.06 }}
+                    >
+                      Let's Talk
+                    </Button>
+                  </nav>
+                </motion.div>
+            )}
+          </AnimatePresence>
         </Container>
       </motion.header>
   )

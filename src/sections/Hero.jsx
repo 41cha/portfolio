@@ -59,7 +59,7 @@ export default function Hero() {
                 drone systems, and digital products
               </motion.p>
               <motion.div variants={revealVariants}>
-                <Button href={CV_URL} download={CV_FILENAME} icon="download-simple" className="hero__cta">
+                <Button magnetic href={CV_URL} download={CV_FILENAME} icon="download-simple" className="hero__cta">
                   Download CV
                 </Button>
               </motion.div>
