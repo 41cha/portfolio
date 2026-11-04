@@ -7,7 +7,6 @@ export const SERVICES = [
     description:
         'Web apps from the database to the interface: React, Node.js, Express and MongoDB. From idea to deployment.',
     tags: ['React', 'Node.js', 'MongoDB'],
-    image: '/images/skylink.webp',
   },
   {
     id: 'web-apps',
@@ -15,6 +14,5 @@ export const SERVICES = [
     description:
         'Web platforms that automate routine work. For example, the GrantHUB UA parser that collects startup funding opportunities from many sources into one database, built with NestJS and Next.js.',
     tags: ['Next.js', 'NestJS', 'Python'],
-    image: '/images/granthub.png',
   },
 ]
