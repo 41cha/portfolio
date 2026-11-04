@@ -16,7 +16,13 @@ export default function Service() {
 
         <ul className="service__list">
           {SERVICES.map((s) => (
-            <ServiceItem key={s.id} {...s} open={openId === s.id} onToggle={() => toggle(s.id)} />
+            <ServiceItem
+              key={s.id}
+              {...s}
+              open={openId === s.id}
+              onClick={() => toggle(s.id)}
+              onHover={() => setOpenId(s.id)}
+            />
           ))}
         </ul>
       </Container>
