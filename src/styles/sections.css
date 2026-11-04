@@ -691,9 +691,7 @@ body { background: var(--surface); }
 /* Section titles are letter-split spans: keep them block-level and centered. */
 .split.section-head__title { display: block; }
 
-/* Smooth anchor scrolling (not with reduced motion) and a little air above
-   the section when a link scrolls to it. */
+/* Smooth anchor scrolling (not with reduced motion). */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
-section[id], footer[id] { scroll-margin-top: 16px; }
