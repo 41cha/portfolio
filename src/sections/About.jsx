@@ -5,7 +5,9 @@ import Button from '../components/Button'
 
 // Text comes from the CV facts in CLAUDE.md. Do not add facts that are not there.
 // The PDF lives in /public, so it is served from the site root.
-const CV_URL = '/Volodymyr_Dzimina_CV_EN.pdf'
+// This is the version without a phone number. Do not link the one with it.
+const CV_URL = '/Volodymyr_Dzimina_CV_EN_NoPhone.pdf'
+const CV_FILENAME = 'Volodymyr_Dzimina_CV.pdf'
 
 export default function About() {
   return (
@@ -23,7 +25,7 @@ export default function About() {
             student council and teach drone engineering to schoolchildren.
           </p>
 
-          <Button href={CV_URL} download icon="download-simple" className="about__cv">
+          <Button href={CV_URL} download={CV_FILENAME} icon="download-simple" className="about__cv">
             Download CV
           </Button>
         </Reveal>
