@@ -15,6 +15,7 @@ export default function ServiceItem({
                                         title,
                                         description,
                                         tags = [],
+                                        index = 0,
                                         open,
                                         onClick,
                                         onHover,
@@ -28,6 +29,10 @@ export default function ServiceItem({
             onPointerMove={(e) => e.pointerType === 'mouse' && onHover(e)}
             onPointerLeave={(e) => e.pointerType === 'mouse' && onLeave()}
         >
+            <span className="service-item__num" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+            </span>
+
             <h3 className="service-item__title">
                 <button
                     type="button"

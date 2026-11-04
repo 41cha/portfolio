@@ -326,7 +326,7 @@
   /* 40px | text | 40px: the left column is empty and balances the arrow, so
      the title and the text are centered in the row. */
   grid-template-columns: 40px minmax(0, 1fr) 40px;
-  grid-template-areas: ". title arrow" ". body .";
+  grid-template-areas: "num title arrow" ". body .";
   column-gap: var(--space-8);
   padding: var(--space-24) var(--space-16);
   border-bottom: var(--border-width) solid var(--border);
@@ -337,12 +337,31 @@
   border-bottom-color: transparent;
   border-radius: var(--radius-card);
 }
+/* A closed row lights up a little on hover (mouse only). */
+@media (hover: hover) and (pointer: fine) {
+  .service-item:not(.is-open):hover {
+    background: var(--bg);
+    border-radius: var(--radius-card);
+    border-bottom-color: transparent;
+  }
+}
+
+/* "01", "02": small index in the left cell (it also balances the arrow). */
+.service-item__num {
+  grid-area: num;
+  align-self: center;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
 
 .service-item__title {
   grid-area: title;
   margin: 0;
-  font-size: var(--fs-h2);
-  line-height: 1.733;
+  font-size: var(--fs-h1);
+  line-height: 1.15;
+  letter-spacing: var(--ls-h1);
   font-weight: 500;
   color: var(--text);
   text-align: center;
@@ -370,7 +389,7 @@
 
 .service-item__arrow {
   grid-area: arrow;
-  align-self: start;
+  align-self: center;
   justify-self: end;
   display: grid;
   place-items: center;
@@ -381,6 +400,9 @@
   transition: transform var(--dur-fast) var(--ease-out);
 }
 .service-item:hover .service-item__arrow { transform: translate(2px, -2px); }
+/* Open row: the arrow turns to point down; on hover it still nudges. */
+.service-item.is-open .service-item__arrow { transform: rotate(90deg); }
+.service-item.is-open:hover .service-item__arrow { transform: rotate(90deg) translate(2px, -2px); }
 
 .service-item__body {
   grid-area: body;
@@ -391,12 +413,21 @@
 /* Spacing lives on an inner element: padding on the animated wrapper would
    keep it 16px tall at height 0 and make the collapse jump. */
 .service-item__body-inner { padding-top: var(--space-16); }
+/* A short rule above the description. */
+.service-item__body-inner::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: 0 auto var(--space-24);
+  background: var(--text);
+}
 .service-item__desc {
   margin: 0 auto;
-  max-width: 560px;
+  max-width: 600px;
   text-align: center;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: var(--fs-body);
+  line-height: 1.6;
   font-weight: 600;
   color: var(--text-body);
 }
@@ -405,14 +436,14 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-8);
-  margin-top: var(--space-16);
+  margin-top: var(--space-24);
+  padding-bottom: var(--space-8);
 }
 
 @media (min-width: 768px) {
   .service { padding-top: var(--space-56); }
   .service-item { padding: var(--space-32) var(--space-24); }
   .service-item__title { line-height: 1.2; }
-  .service-item__arrow { margin-top: 4px; }
 }
 
 /* ==========================================================================

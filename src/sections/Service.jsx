@@ -45,10 +45,11 @@ export default function Service() {
         <SectionHead ghost="SERVICE" title="/SERVICE" />
 
         <ul className="service__list">
-          {SERVICES.map((s) => (
+          {SERVICES.map((s, i) => (
             <ServiceItem
               key={s.id}
               {...s}
+              index={i}
               open={openId === s.id}
               onClick={(e) => click(s.id, e)}
               onHover={(e) => hover(s.id, e)}
