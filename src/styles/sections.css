@@ -235,6 +235,34 @@
 }
 .work-card .tag { height: 22px; padding: 0 12px; }
 
+.work-card__role {
+  margin: var(--space-8) 0 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+.work-card__text {
+  margin: 12px 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--text-body);
+}
+.work-card__status {
+  margin: 12px 0 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  font-style: italic;
+}
+.work-card__link {
+  display: inline-block;
+  margin-top: var(--space-16);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.work-card__link:hover { color: var(--color-secondary); }
+
 @media (min-width: 768px) {
   .work { padding-top: var(--space-56); }
 
