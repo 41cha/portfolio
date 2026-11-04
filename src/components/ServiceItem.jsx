@@ -22,7 +22,7 @@ export default function ServiceItem({
     return (
         <li
             className={`service-item${open ? ' is-open' : ''}`}
-            onPointerMove={(e) => e.pointerType === 'mouse' && onHover()}
+            onPointerMove={(e) => e.pointerType === 'mouse' && onHover(e)}
         >
             <h3 className="service-item__title">
                 <button
