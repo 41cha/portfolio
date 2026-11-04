@@ -28,7 +28,7 @@ export default function Work() {
             <div className="work__cards">
               <AnimatePresence mode="popLayout">
                 {visible.map((p, i) => (
-                    <ProjectCard key={p.id} title={p.title} tags={p.tags} index={i} />
+                    <ProjectCard key={p.id} {...p} index={i} />
                 ))}
               </AnimatePresence>
             </div>
