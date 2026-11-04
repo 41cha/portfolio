@@ -455,7 +455,16 @@
     column-gap: var(--space-32);
   }
   .service-item:not(.is-open) { column-gap: var(--space-32); }
-  .service-item__media { margin-top: 0; max-width: none; }
+  /* The image fills the height of the text (title + body rows) instead of
+     setting its own height, so it never pushes the text while the row opens. */
+  .service-item__media-wrap { align-self: stretch; }
+  .service-item__media {
+    position: absolute;
+    inset: 0;
+    margin-top: 0;
+    max-width: none;
+    aspect-ratio: auto;
+  }
 }
 
 /* ==========================================================================

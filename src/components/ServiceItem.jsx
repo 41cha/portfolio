@@ -1,7 +1,27 @@
+import { useSyncExternalStore } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Icon from './Icon'
 import Tag from './Tag'
-import { collapse } from '../lib/motion'
+import { collapse, DUR, EASE_OUT } from '../lib/motion'
+
+// >= 1024px the open row is three columns and the image fills the text height.
+// There the image only fades in. Below that it sits under the text and the
+// row grows with a height animation.
+const DESKTOP = '(min-width: 1024px)'
+const subscribe = (cb) => {
+    const mq = window.matchMedia(DESKTOP)
+    mq.addEventListener('change', cb)
+    return () => mq.removeEventListener('change', cb)
+}
+const useIsDesktop = () =>
+    useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP).matches, () => false)
+
+const fade = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: DUR.base, ease: EASE_OUT },
+}
 
 // One accordion row. The title button's ::after stretches over the whole row
 // (see sections.css), so the whole header is clickable.
@@ -21,6 +41,7 @@ export default function ServiceItem({
                                         onLeave,
                                     }) {
     const bodyId = `service-body-${id}`
+    const isDesktop = useIsDesktop()
 
     return (
         <li
@@ -62,7 +83,11 @@ export default function ServiceItem({
                 )}
 
                 {open && (
-                    <motion.div key="media" className="service-item__media-wrap" {...collapse}>
+                    <motion.div
+                        key="media"
+                        className="service-item__media-wrap"
+                        {...(isDesktop ? fade : collapse)}
+                    >
                         {/* image: a screenshot of a real project that shows this service */}
                         <div className="service-item__media" role={image ? undefined : 'img'} aria-label={image ? undefined : `${title} preview`}>
                             {image && <img src={image} alt={`${title} example project`} loading="lazy" />}
