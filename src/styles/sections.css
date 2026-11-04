@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-16);
-  padding-block: var(--space-32);
+  padding-block: var(--space-24);
 }
 
 .nav .status-pill { font-size: 18px; font-weight: 500; line-height: 1; }
@@ -63,7 +63,7 @@
 
 /* Tablet: [status] [Menu] [Let's Talk] */
 @media (min-width: 768px) {
-  .nav__bar { padding-block: var(--space-56); }
+  .nav__bar { padding-block: var(--space-32); }
   .nav .status-pill { font-size: var(--fs-h3); }
   .nav__menu-btn { order: 0; font-size: var(--fs-h3); font-weight: 500; }
   .nav__cta { display: inline-flex; }
@@ -72,7 +72,7 @@
 
 /* Desktop: [status] Work Service Experience Contact [Let's Talk] */
 @media (min-width: 1024px) {
-  .nav__bar { padding-block: var(--space-72); }
+  .nav__bar { padding-block: var(--space-40); }
   .nav__menu-btn { display: none; }
   .nav__panel { display: none; }
   .nav__links {
@@ -125,7 +125,8 @@
 
 @media (min-width: 768px) {
   .hero__inner {
-    min-height: max(560px, calc(100svh - 190px));
+    /* 142px = the shorter nav bar + the hero's bottom padding. */
+    min-height: max(560px, calc(100svh - 142px));
   }
   .hero__title { margin-block: auto; }
 
@@ -142,6 +143,7 @@
 }
 
 @media (min-width: 1024px) {
+  .hero__inner { min-height: max(560px, calc(100svh - 126px)); }
   .hero__body { padding-inline: var(--space-32); }
 }
 
