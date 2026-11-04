@@ -4,6 +4,11 @@ import Button from '../components/Button'
 import Pill from '../components/Pill'
 import { SOCIALS } from '../data/socials'
 
+// The PDF lives in /public. This is the version without a phone number:
+// do not link the one that has it.
+const CV_URL = '/Volodymyr_Dzimina_CV_EN_NoPhone.pdf'
+const CV_FILENAME = 'Volodymyr_Dzimina_CV.pdf'
+
 export default function Hero() {
   return (
       <section id="home" className="hero">
@@ -22,8 +27,8 @@ export default function Hero() {
                 <br />
                 drone systems, and digital products
               </p>
-              <Button href="#contact" icon="arrow-up-right" className="hero__cta">
-                Let's collaborate
+              <Button href={CV_URL} download={CV_FILENAME} icon="download-simple" className="hero__cta">
+                Download CV
               </Button>
             </div>
 
