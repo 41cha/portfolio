@@ -6,8 +6,15 @@ export const SERVICES = [
     title: 'FULLSTACK DEVELOPMENT',
     description:
         'Web apps from the database to the interface: React, Node.js, Express and MongoDB. From idea to deployment.',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    image: '/images/skylink.webp',
+    // The main service: marked with a badge and shown with its stack by group
+    // (groups replace the tags). Only technologies from the CV facts.
+    badge: 'Main focus',
+    groups: [
+      { label: 'Frontend', items: ['React'] },
+      { label: 'Backend', items: ['Node.js', 'Express'] },
+      { label: 'Database', items: ['MongoDB'] },
+      { label: 'Tools', items: ['Docker', 'Git'] },
+    ],
   },
   {
     id: 'web-apps',
@@ -15,6 +22,5 @@ export const SERVICES = [
     description:
         'Web platforms that automate routine work. For example, the GrantHUB UA parser that collects startup funding opportunities from many sources into one database, built with NestJS and Next.js.',
     tags: ['Next.js', 'NestJS', 'Python'],
-    image: '/images/granthub.png',
   },
 ]
