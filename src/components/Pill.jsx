@@ -1,19 +1,31 @@
+import { motion } from 'framer-motion'
 import Icon from './Icon'
 
 // Filter / social pill.
 // active: selected filter (black fill), only for button mode
+// indicator: a layoutId. Pills in one group that share it get a black
+//            background that slides to the active one instead of switching.
 // href: renders <a> (social links), opens external URLs in a new tab
 export default function Pill({
                                  active = false,
                                  icon,
                                  href,
+                                 indicator,
                                  className = '',
                                  children,
                                  ...rest
                              }) {
-    const classes = `pill ${className}`.trim()
+    const classes = `pill${indicator ? ' pill--indicator' : ''} ${className}`.trim()
     const content = (
         <>
+            {indicator && active && (
+                <motion.span
+                    layoutId={indicator}
+                    className="pill__bg"
+                    transition={{ type: 'spring', stiffness: 520, damping: 40 }}
+                    aria-hidden="true"
+                />
+            )}
             {icon && <Icon name={icon} size={20} />}
             {children}
         </>

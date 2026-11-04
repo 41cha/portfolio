@@ -19,7 +19,7 @@ export default function Work() {
           <div className="work__content">
             <div className="work__filters" role="group" aria-label="Filter projects">
               {FILTERS.map((f) => (
-                  <Pill key={f} active={filter === f} onClick={() => setFilter(f)}>
+                  <Pill key={f} active={filter === f} indicator="work-filter" onClick={() => setFilter(f)}>
                     {f}
                   </Pill>
               ))}

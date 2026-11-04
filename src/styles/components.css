@@ -56,3 +56,51 @@ a.btn, a.pill { text-decoration: none; }
 .section--dark .text-h3,
 .section--dark .text-display { color: var(--text-on-dark); }
 .section--dark .text-small { color: var(--color-gray-2); }
+
+/* SplitText: each word clips its letters so they rise out of a line.
+   The small padding/negative margin keeps outlines and descenders from being cut. */
+.split { display: inline-block; }
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-block: 0.08em;
+  margin-block: -0.08em;
+}
+.split__char { display: inline-block; will-change: transform; }
+
+/* "Open for work": a soft ring pulses out of the green dot. */
+.status-pill__dot { position: relative; }
+.status-pill__dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: status-ping 2.4s var(--ease-out) infinite;
+}
+@keyframes status-ping {
+  0%   { transform: scale(1); opacity: 0.55; }
+  70%, 100% { transform: scale(3); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-pill__dot::after { animation: none; display: none; }
+}
+
+/* Filter pills with a sliding background (Pill `indicator`). The black fill is
+   a separate element (.pill__bg) that moves between pills; the pressed pill
+   only changes its text colour. */
+.pill--indicator { position: relative; isolation: isolate; }
+.pill--indicator[aria-pressed="true"] {
+  background: var(--surface);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  transition-delay: 60ms;
+}
+.pill__bg {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-primary);
+}

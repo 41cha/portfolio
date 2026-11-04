@@ -19,12 +19,46 @@ export const staggerDelay = (i) => Math.min(i, MAX_STAGGER_ITEMS - 1) * STAGGER
 // Fade + 24px rise. `custom` = delay in seconds.
 export const revealVariants = {
   hidden: { opacity: 0, y: REVEAL_DISTANCE },
-  visible: (delay = 0) => ({
+  // `delay` is only set when given: an explicit `delay: 0` would override the
+  // delayChildren / staggerChildren of a parent (see staggerParent below).
+  visible: (delay) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: DUR.base, ease: EASE_OUT, delay },
+    transition: { duration: DUR.base, ease: EASE_OUT, ...(delay ? { delay } : {}) },
   }),
   exit: { opacity: 0, transition: { duration: DUR.fast, ease: EASE_OUT } },
+}
+
+// ---- Expressive motion (hero, cards, section titles) ----
+// A sharper ease-out for big text and images: fast start, long soft landing.
+export const EASE_EXPO = [0.16, 1, 0.3, 1]
+export const DUR_HERO = 0.9
+
+// Spring for hover / magnet effects (feels physical, no fixed duration).
+export const SPRING = { type: 'spring', stiffness: 220, damping: 22, mass: 0.6 }
+
+// Parent that staggers its children. Put `variants={staggerParent(...)}` on a
+// motion element; children with their own variants then play one after another.
+export const staggerParent = (stagger = STAGGER, delayChildren = 0) => ({
+  hidden: {},
+  visible: { transition: { staggerChildren: stagger, delayChildren } },
+})
+
+// Text rises out of an overflow-hidden line (used per letter by SplitText).
+export const maskUp = {
+  hidden: { y: '110%' },
+  visible: { y: 0, transition: { duration: DUR_HERO, ease: EASE_EXPO } },
+}
+
+// Image frame uncovered from top to bottom. Pair with `zoomSettle` on the <img>.
+export const clipReveal = {
+  hidden: { clipPath: 'inset(0 0 100% 0)' },
+  visible: { clipPath: 'inset(0 0 0% 0)', transition: { duration: DUR_HERO, ease: EASE_EXPO } },
+}
+// The picture inside the frame starts zoomed in and settles to its size.
+export const zoomSettle = {
+  hidden: { scale: 1.2 },
+  visible: { scale: 1, transition: { duration: 1.2, ease: EASE_EXPO } },
 }
 
 // Accordion open/close
