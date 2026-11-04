@@ -86,3 +86,21 @@ a.btn, a.pill { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .status-pill__dot::after { animation: none; display: none; }
 }
+
+/* Filter pills with a sliding background (Pill `indicator`). The black fill is
+   a separate element (.pill__bg) that moves between pills; the pressed pill
+   only changes its text colour. */
+.pill--indicator { position: relative; isolation: isolate; }
+.pill--indicator[aria-pressed="true"] {
+  background: var(--surface);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  transition-delay: 60ms;
+}
+.pill__bg {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-primary);
+}
