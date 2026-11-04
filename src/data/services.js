@@ -1,5 +1,5 @@
-// Descriptions for rows 2 and 3 are drafts based on the LinkedIn profile.
-// Review and edit them.
+// Descriptions are based on the CV facts in CLAUDE.md. Do not add technologies
+// or projects that are not listed there.
 export const SERVICES = [
   {
     id: 'fullstack',
@@ -12,14 +12,7 @@ export const SERVICES = [
     id: 'web-apps',
     title: 'WEB APPS & AUTOMATION',
     description:
-        'Platforms with automated data pipelines: parsers that gather sources into one database, built on NestJS, Next.js and Python.',
+        'Web platforms that automate routine work. For example, the GrantHUB UA parser that collects startup funding opportunities from many sources into one database, built with NestJS and Next.js.',
     tags: ['Next.js', 'NestJS', 'Python'],
-  },
-  {
-    id: 'computer-vision',
-    title: 'COMPUTER VISION & ROBOTICS',
-    description:
-        'Computer vision inspection systems and drone engineering, from FPV builds to teaching the next pilots.',
-    tags: ['Python', 'Computer Vision', 'Drones'],
   },
 ]
