@@ -4,13 +4,7 @@ import Container from '../components/Container'
 import StatusPill from '../components/StatusPill'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
-
-const LINKS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Service', href: '#service' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact', href: '#contact' },
-]
+import { NAV_LINKS as LINKS } from '../data/navLinks'
 
 // Layout per breakpoint (see sections.css):
 //   mobile  <768   : [Menu]  ........  [Open for work]
