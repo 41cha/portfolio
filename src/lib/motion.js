@@ -19,10 +19,12 @@ export const staggerDelay = (i) => Math.min(i, MAX_STAGGER_ITEMS - 1) * STAGGER
 // Fade + 24px rise. `custom` = delay in seconds.
 export const revealVariants = {
   hidden: { opacity: 0, y: REVEAL_DISTANCE },
-  visible: (delay = 0) => ({
+  // `delay` is only set when given: an explicit `delay: 0` would override the
+  // delayChildren / staggerChildren of a parent (see staggerParent below).
+  visible: (delay) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: DUR.base, ease: EASE_OUT, delay },
+    transition: { duration: DUR.base, ease: EASE_OUT, ...(delay ? { delay } : {}) },
   }),
   exit: { opacity: 0, transition: { duration: DUR.fast, ease: EASE_OUT } },
 }

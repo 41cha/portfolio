@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import Container from '../components/Container'
 import StatusPill from '../components/StatusPill'
 import Button from '../components/Button'
@@ -20,7 +21,12 @@ export default function Nav() {
   const close = () => setOpen(false)
 
   return (
-      <header className="nav">
+      <motion.header
+          className="nav"
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
         <Container>
           <div className="nav__bar">
             <StatusPill />
@@ -67,6 +73,6 @@ export default function Nav() {
               </nav>
           )}
         </Container>
-      </header>
+      </motion.header>
   )
 }
