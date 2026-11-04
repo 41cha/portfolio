@@ -6,10 +6,12 @@ import Experience from './sections/Experience'
 import Footer from './sections/Footer'
 import ScrollProgress from './components/ScrollProgress'
 import MiniNav from './components/MiniNav'
+import ParticleBackground from './components/ParticleBackground'
 
 export default function App() {
     return (
         <>
+            <ParticleBackground />
             <ScrollProgress />
             <MiniNav />
             <Nav />
