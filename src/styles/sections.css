@@ -212,7 +212,15 @@
 
 .work__all { grid-area: all; width: 100%; }
 
-.work-card { transition: transform var(--dur-fast) var(--ease-out); }
+/* Cards stretch to the row height; the link sits at the bottom of each card. */
+.work__cards > article { display: flex; }
+.work-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
 .work-card:hover { transform: translateY(var(--hover-lift)); }
 
 .work-card__image {
@@ -253,8 +261,9 @@
   font-style: italic;
 }
 .work-card__link {
-  display: inline-block;
-  margin-top: var(--space-16);
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: var(--space-16);
   font-size: var(--fs-body);
   font-weight: 600;
   color: var(--text);
