@@ -12,7 +12,7 @@ export const PROJECTS = [
     status: 'No longer maintained',
     url: 'https://www.skylinkfpv.pp.ua/',
     image: '/images/skylink.webp',
-    imagePosition: '40% center',
+    imagePosition: 'center top',
   },
   {
     id: 'granthub',
@@ -25,7 +25,7 @@ export const PROJECTS = [
     status: 'Demo frontend only: the backend is offline',
     url: 'https://platform-for-grants.vercel.app/',
     image: '/images/granthub.png',
-    imagePosition: 'top left',
+    imagePosition: 'center top',
   },
 ]
 
