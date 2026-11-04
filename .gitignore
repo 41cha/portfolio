@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local notes for Claude Code (personal, not part of the site)
+CLAUDE.md
