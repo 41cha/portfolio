@@ -1,21 +1,12 @@
-import { useSyncExternalStore } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Icon from './Icon'
 import Tag from './Tag'
 import { collapse, DUR, EASE_OUT } from '../lib/motion'
+import { useIsDesktop } from '../lib/useMediaQuery'
 
 // >= 1024px the open row is three columns and the image fills the text height.
 // There the image only fades in. Below that it sits under the text and the
 // row grows with a height animation.
-const DESKTOP = '(min-width: 1024px)'
-const subscribe = (cb) => {
-    const mq = window.matchMedia(DESKTOP)
-    mq.addEventListener('change', cb)
-    return () => mq.removeEventListener('change', cb)
-}
-const useIsDesktop = () =>
-    useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP).matches, () => false)
-
 const fade = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },

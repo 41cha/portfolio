@@ -56,3 +56,15 @@ a.btn, a.pill { text-decoration: none; }
 .section--dark .text-h3,
 .section--dark .text-display { color: var(--text-on-dark); }
 .section--dark .text-small { color: var(--color-gray-2); }
+
+/* SplitText: each word clips its letters so they rise out of a line.
+   The small padding/negative margin keeps outlines and descenders from being cut. */
+.split { display: inline-block; }
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-block: 0.08em;
+  margin-block: -0.08em;
+}
+.split__char { display: inline-block; will-change: transform; }
