@@ -6,7 +6,15 @@ export const SERVICES = [
     title: 'FULLSTACK DEVELOPMENT',
     description:
         'Web apps from the database to the interface: React, Node.js, Express and MongoDB. From idea to deployment.',
-    tags: ['React', 'Node.js', 'MongoDB'],
+    // The main service: marked with a badge and shown with its stack by group
+    // (groups replace the tags). Only technologies from the CV facts.
+    badge: 'Main focus',
+    groups: [
+      { label: 'Frontend', items: ['React'] },
+      { label: 'Backend', items: ['Node.js', 'Express'] },
+      { label: 'Database', items: ['MongoDB'] },
+      { label: 'Tools', items: ['Docker', 'Git'] },
+    ],
   },
   {
     id: 'web-apps',

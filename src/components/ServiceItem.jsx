@@ -15,6 +15,8 @@ export default function ServiceItem({
                                         title,
                                         description,
                                         tags = [],
+                                        badge,
+                                        groups,
                                         index = 0,
                                         open,
                                         onClick,
@@ -33,17 +35,20 @@ export default function ServiceItem({
                 {String(index + 1).padStart(2, '0')}
             </span>
 
-            <h3 className="service-item__title">
-                <button
-                    type="button"
-                    className="service-item__toggle"
-                    aria-expanded={open}
-                    aria-controls={bodyId}
-                    onClick={onClick}
-                >
-                    {title}
-                </button>
-            </h3>
+            <div className="service-item__head">
+                {badge && <span className="service-item__badge">{badge}</span>}
+                <h3 className="service-item__title">
+                    <button
+                        type="button"
+                        className="service-item__toggle"
+                        aria-expanded={open}
+                        aria-controls={bodyId}
+                        onClick={onClick}
+                    >
+                        {title}
+                    </button>
+                </h3>
+            </div>
 
             <span className="service-item__arrow" aria-hidden="true">
         <Icon name="arrow-up-right" weight="bold" />
@@ -55,7 +60,17 @@ export default function ServiceItem({
                     <motion.div key="body" id={bodyId} className="service-item__body" {...collapse}>
                         <div className="service-item__body-inner">
                             <p className="service-item__desc">{description}</p>
-                            {tags.length > 0 && (
+                            {groups && (
+                                <dl className="service-item__groups">
+                                    {groups.map((g) => (
+                                        <div key={g.label} className="service-item__group">
+                                            <dt>{g.label}</dt>
+                                            <dd>{g.items.join(', ')}</dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                            )}
+                            {!groups && tags.length > 0 && (
                                 <div className="service-item__tags">
                                     {tags.map((t) => (
                                         <Tag key={t}>{t}</Tag>
