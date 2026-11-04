@@ -5,9 +5,10 @@ import { collapse } from '../lib/motion'
 
 // One accordion row. The title button's ::after stretches over the whole row
 // (see sections.css), so the whole header is clickable.
-// onClick: click / tap / Enter / Space on the row. There is no hover-to-open:
-// opening a row moves the rows below it, and that made hover open and close
-// rows in a loop.
+// onClick: click / tap / Enter / Space on the row.
+// onHover(e): a mouse moves over the row (opens it on desktop).
+// onLeave: the mouse leaves the row.
+// Opening a row moves the rows below it, so Service.jsx guards hover (see there).
 export default function ServiceItem({
                                         id,
                                         title,
@@ -16,11 +17,17 @@ export default function ServiceItem({
                                         image,
                                         open,
                                         onClick,
+                                        onHover,
+                                        onLeave,
                                     }) {
     const bodyId = `service-body-${id}`
 
     return (
-        <li className={`service-item${open ? ' is-open' : ''}`}>
+        <li
+            className={`service-item${open ? ' is-open' : ''}`}
+            onPointerMove={(e) => e.pointerType === 'mouse' && onHover(e)}
+            onPointerLeave={(e) => e.pointerType === 'mouse' && onLeave()}
+        >
             <h3 className="service-item__title">
                 <button
                     type="button"
