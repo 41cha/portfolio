@@ -1,12 +1,11 @@
 // Source of truth: the CV facts in CLAUDE.md. Newest first.
 // details: optional one-line summary shown under the role.
-// TODO: verify the "Student Council" date (start date is not in the CV facts).
 export const EXPERIENCE = [
   {
     id: 'student-council',
     company: 'Student Council, VNTU INTITA',
     role: 'Head (Chair)',
-    date: 'Now',
+    date: 'Dec 2025 - Now',
     details:
       'Leads 19 students and organizes campus events. Volunteer at the Innovation Day conferences in 2025 and 2026.',
   },
