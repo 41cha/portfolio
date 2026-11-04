@@ -457,6 +457,14 @@
   font-weight: 600;
   color: var(--color-gray-2);
 }
+.experience-item__details {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--color-gray-2);
+}
 .experience-item__role { font-size: 14px; }
 .experience-item__date { font-size: 14px; }
 
