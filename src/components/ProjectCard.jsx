@@ -6,8 +6,10 @@ import { revealVariants, staggerDelay, VIEWPORT } from '../lib/motion'
 // Outer motion.article: reveal, stagger, filter layout.
 // Inner .work-card: CSS hover lift (kept separate so Framer's inline
 // transform doesn't override the :hover transform).
-// TODO: wrap the card in a link to the project page once routing is added.
-const ProjectCard = forwardRef(function ProjectCard({ title, tags, image, imagePosition, index = 0 }, ref) {
+const ProjectCard = forwardRef(function ProjectCard(
+    { title, role, description, tags, status, url, image, imagePosition, index = 0 },
+    ref,
+) {
     return (
         <motion.article
             ref={ref}
@@ -33,11 +35,19 @@ const ProjectCard = forwardRef(function ProjectCard({ title, tags, image, imageP
                     <div className="work-card__image" role="img" aria-label={`${title} preview`} />
                 )}
                 <h3 className="work-card__title">{title}</h3>
+                {role && <p className="work-card__role">{role}</p>}
+                {description && <p className="work-card__text">{description}</p>}
                 <div className="work-card__tags">
                     {tags.map((t) => (
                         <Tag key={t}>{t}</Tag>
                     ))}
                 </div>
+                {status && <p className="work-card__status">{status}</p>}
+                {url && (
+                    <a className="work-card__link" href={url} target="_blank" rel="noopener noreferrer">
+                        Live demo ↗
+                    </a>
+                )}
             </div>
         </motion.article>
     )
