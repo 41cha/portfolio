@@ -12,6 +12,7 @@ export default function ServiceItem({
                                         title,
                                         description,
                                         tags = [],
+                                        image,
                                         open,
                                         onClick,
                                         onHover,
@@ -60,8 +61,10 @@ export default function ServiceItem({
 
                 {open && (
                     <motion.div key="media" className="service-item__media-wrap" {...collapse}>
-                        {/* TODO: replace the gray placeholder with a real preview image */}
-                        <div className="service-item__media" role="img" aria-label={`${title} preview`} />
+                        {/* image: a screenshot of a real project that shows this service */}
+                        <div className="service-item__media" role={image ? undefined : 'img'} aria-label={image ? undefined : `${title} preview`}>
+                            {image && <img src={image} alt={`${title} example project`} loading="lazy" />}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
