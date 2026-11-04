@@ -5,8 +5,9 @@ import { collapse } from '../lib/motion'
 
 // One accordion row. The title button's ::after stretches over the whole row
 // (see sections.css), so the whole header is clickable.
-// onHover: called when a mouse moves over the row (opens it on desktop).
-// onClick: click / tap on the row.
+// onClick: click / tap / Enter / Space on the row. There is no hover-to-open:
+// opening a row moves the rows below it, and that made hover open and close
+// rows in a loop.
 export default function ServiceItem({
                                         id,
                                         title,
@@ -15,15 +16,11 @@ export default function ServiceItem({
                                         image,
                                         open,
                                         onClick,
-                                        onHover,
                                     }) {
     const bodyId = `service-body-${id}`
 
     return (
-        <li
-            className={`service-item${open ? ' is-open' : ''}`}
-            onPointerMove={(e) => e.pointerType === 'mouse' && onHover(e)}
-        >
+        <li className={`service-item${open ? ' is-open' : ''}`}>
             <h3 className="service-item__title">
                 <button
                     type="button"
@@ -31,8 +28,6 @@ export default function ServiceItem({
                     aria-expanded={open}
                     aria-controls={bodyId}
                     onClick={onClick}
-                    // keyboard users: tabbing to a row opens it (taps don't match :focus-visible)
-                    onFocus={(e) => e.currentTarget.matches(':focus-visible') && onHover()}
                 >
                     {title}
                 </button>
